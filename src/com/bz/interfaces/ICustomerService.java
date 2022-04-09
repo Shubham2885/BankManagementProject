@@ -9,3 +9,4 @@ public interface ICustomerService {
 	public Customer search(int id);
 	public void delete(int id);
 }
+ 

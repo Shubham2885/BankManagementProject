@@ -1,7 +1,7 @@
 package com.bz.model;
 
 public class Customer {
-
+	
 	private int id;
 	private String firstName;
 	private String middleName;
@@ -73,3 +73,4 @@ public class Customer {
 	}
 	
 }
+
