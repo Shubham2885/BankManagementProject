@@ -10,8 +10,12 @@ public class CustomerServiceImpl implements ICustomerService {
 	private ArrayList<Customer> listOfCustomer = new ArrayList<Customer>();
 	
 	@Override
-	public void add(Customer customer) {
+	public int register(Customer customer) {
+		int size = listOfCustomer.size();
+		int id = 10000 + size;
+		customer.setId(id);
 		listOfCustomer.add(customer);
+		return id;
 	}
 
 	@Override
@@ -21,7 +25,14 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public Customer search(int id) {
-		// TODO Auto-generated method stub
+		for(Customer customer : listOfCustomer) {
+			System.out.println("Customer = "+customer);
+			if(customer.getId() == id) {
+				System.out.println("Customer is available by id");
+				return customer;
+			}
+		}
+		System.out.println("Customer is not available by id");
 		return null;
 	}
 

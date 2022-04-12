@@ -2,18 +2,22 @@ package com.bz.controller;
 
 import java.util.Scanner;
 
+import com.bz.comman.AccountType;
 import com.bz.comman.Validation;
+import com.bz.interfaces.IAccountService;
 import com.bz.interfaces.ICustomerService;
+import com.bz.model.Account;
 import com.bz.model.Customer;
+import com.bz.services.AccountServiceImpl;
 import com.bz.services.CustomerServiceImpl;
 
 public class BankManagementApp {
 
 	static Scanner scanner = new Scanner(System.in);
 	static ICustomerService customerService = new CustomerServiceImpl();
+	static IAccountService accountService = new AccountServiceImpl();
 	
 	public static void registerCustomer() {
-		
 		
 		Customer customer = new Customer();
 		System.out.println("Enter the firstName");
@@ -48,20 +52,51 @@ public class BankManagementApp {
 		String email = scanner.next();
 		customer.setEmail(email);
 		
-		customerService.add(customer);
+		//method call
+		int id = customerService.register(customer);
+		System.out.println("Your Customer id is "+id);
 	}
 	
 	private static void showAllCustomer() {
 		System.out.println(customerService.getAllCustomers());
 	}
 	
+	private static void openAccount() {
+		System.out.println("Enter the Customer Id");
+		int custId = scanner.nextInt();
+		System.out.println("List Account Type");
+		System.out.println("1 Saving Account");
+		System.out.println("2 Current Account");
+		
+		System.out.println("Select Acccount type...");
+		int choice = scanner.nextInt();
+		
+		AccountType accountType = AccountType.Basic;
+		switch (choice) {
+		case 1:
+			accountType = AccountType.Saving;
+			break;
+		case 2:
+			accountType = AccountType.Current;
+			break;
+		default:
+			break;
+		}
+		Account account = accountService.openAccount(custId, accountType, customerService);
+		System.out.println("New Account is Create ");
+		System.out.println("****************************************");
+		System.out.println("Account No :"+account.getAccountNo());
+		System.out.println("IFSC Code : "+account.getIfscNo());
+		System.out.println("Balance  :"+account.getBalance());
+		
+	}
 	public static void main(String[] args) {
 		int ch = 1;
 		do {
 			
 			System.out.println("Welcome to Bank");
-			System.out.println("1 Register Customer");
-			System.out.println("2 Get All Customer");
+			System.out.println("A - 1 Register Customer");
+			System.out.println("A - 2 Open Account");
 			System.out.println("Enter your choice...");
 			int choice = scanner.nextInt();
 			
@@ -70,7 +105,7 @@ public class BankManagementApp {
 				registerCustomer();
 				break;
 			case 2:
-				showAllCustomer();
+				openAccount();
 				break;
 			default:
 				break;
@@ -80,6 +115,7 @@ public class BankManagementApp {
 			ch = scanner.nextInt();
 		}while(ch == 1);
 	}
+	
 }
 
 //Customer( id, firstName, middleName, lastName, mobileNo, username, password, email, address _id)

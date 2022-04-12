@@ -6,9 +6,9 @@ public class Account {
 	private String ifscNo;
 	private String branchCode;
 	private String accountType;
-	private long balance;
+	private double balance;
 	private String branchName;
-	private String customer_id;
+	private int customer_id;
 	public long getAccountNo() {
 		
 		
@@ -35,10 +35,11 @@ public class Account {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	public long getBalance() {
+	
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(long balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	public String getBranchName() {
@@ -47,13 +48,14 @@ public class Account {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getCustomer_id() {
+	
+	
+	public int getCustomer_id() {
 		return customer_id;
 	}
-	public void setCustomer_id(String customer_id) {
+	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
-	
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
