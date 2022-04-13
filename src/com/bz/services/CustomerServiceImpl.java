@@ -2,6 +2,7 @@ package com.bz.services;
 
 import java.util.ArrayList;
 
+import com.bz.exception.CustomException;
 import com.bz.interfaces.ICustomerService;
 import com.bz.model.Customer;
 
@@ -24,7 +25,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	}
 
 	@Override
-	public Customer search(int id) {
+	public Customer search(int id) throws CustomException.CustomerNotFoundException {
 		for(Customer customer : listOfCustomer) {
 			System.out.println("Customer = "+customer);
 			if(customer.getId() == id) {
@@ -32,8 +33,7 @@ public class CustomerServiceImpl implements ICustomerService {
 				return customer;
 			}
 		}
-		System.out.println("Customer is not available by id");
-		return null;
+		throw new CustomException.CustomerNotFoundException("Customer is not found");
 	}
 
 	@Override

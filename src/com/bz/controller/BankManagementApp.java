@@ -3,6 +3,7 @@ package com.bz.controller;
 import java.util.Scanner;
 
 import com.bz.comman.AccountType;
+import com.bz.comman.ScannerUtil;
 import com.bz.comman.Validation;
 import com.bz.interfaces.IAccountService;
 import com.bz.interfaces.ICustomerService;
@@ -13,43 +14,35 @@ import com.bz.services.CustomerServiceImpl;
 
 public class BankManagementApp {
 
-	static Scanner scanner = new Scanner(System.in);
 	static ICustomerService customerService = new CustomerServiceImpl();
 	static IAccountService accountService = new AccountServiceImpl();
 	
 	public static void registerCustomer() {
 		
 		Customer customer = new Customer();
-		System.out.println("Enter the firstName");
-		String firstName = scanner.next();
+		String firstName = ScannerUtil.getString("firstName");
 		Validation.checkStartWithCap(firstName);
 		customer.setFirstName(firstName);
 		
-		System.out.println("Enter the middleName");
-		String middleName = scanner.next();
+		String middleName = ScannerUtil.getString("middleName");
 		Validation.checkStartWithCap(middleName);
 		customer.setMiddleName(middleName);
 		
-		System.out.println("Enter the lastName");
-		String lastName = scanner.next();
+		String lastName = ScannerUtil.getString("lastName");
 		Validation.checkStartWithCap(lastName);
 		customer.setLastName(lastName);
 		
-		System.out.println("Enter the mobileNo");
-		String mobileNo = scanner.next();
+		String mobileNo = ScannerUtil.getString("mobileNo");
 		Validation.checkMobileNo(mobileNo);
 		customer.setMobileNo(mobileNo);
 		
-		System.out.println("Enter the username");
-		String username = scanner.next();
+		String username = ScannerUtil.getString("username");
 		customer.setUsername(username);
 		
-		System.out.println("Enter the password");
-		String password = scanner.next();
+		String password = ScannerUtil.getString("password");
 		customer.setPassword(password);
 		
-		System.out.println("Enter the email");
-		String email = scanner.next();
+		String email = ScannerUtil.getString("email");
 		customer.setEmail(email);
 		
 		//method call
@@ -62,14 +55,12 @@ public class BankManagementApp {
 	}
 	
 	private static void openAccount() {
-		System.out.println("Enter the Customer Id");
-		int custId = scanner.nextInt();
+		int custId = ScannerUtil.getInt("Customer Id");
 		System.out.println("List Account Type");
 		System.out.println("1 Saving Account");
 		System.out.println("2 Current Account");
 		
-		System.out.println("Select Acccount type...");
-		int choice = scanner.nextInt();
+		int choice = ScannerUtil.getInt("Acccount type...");
 		
 		AccountType accountType = AccountType.Basic;
 		switch (choice) {
@@ -90,6 +81,22 @@ public class BankManagementApp {
 		System.out.println("Balance  :"+account.getBalance());
 		
 	}
+	
+	private static void debitBalance() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void creditBalance() {
+		int custId = ScannerUtil.getInt("Customer id");
+		long accountNo = ScannerUtil.getLong("Account No");
+		double balance = ScannerUtil.getDouble("Balance");
+		double newBalance = accountService.creditBalance(custId, accountNo, balance, customerService);
+		System.out.println("*****************************************");
+		System.out.println("your New Balance is "+newBalance);
+		System.out.println("*****************************************");
+	}
+	
 	public static void main(String[] args) {
 		int ch = 1;
 		do {
@@ -97,8 +104,9 @@ public class BankManagementApp {
 			System.out.println("Welcome to Bank");
 			System.out.println("A - 1 Register Customer");
 			System.out.println("A - 2 Open Account");
-			System.out.println("Enter your choice...");
-			int choice = scanner.nextInt();
+			System.out.println("A - 3 Credit Balance");
+			System.out.println("A - 4 Debit Balance");
+			int choice = ScannerUtil.getInt("choice...");
 			
 			switch (choice) {
 			case 1:
@@ -107,12 +115,17 @@ public class BankManagementApp {
 			case 2:
 				openAccount();
 				break;
+			case 3:
+				creditBalance();
+				break;
+			case 4:
+				debitBalance();
+				break;
 			default:
 				break;
 			}
 			
-			System.out.println("Do you want to contineu.... press 1");
-			ch = scanner.nextInt();
+			ch = ScannerUtil.getInt("Do you want to contineu.... press 1");
 		}while(ch == 1);
 	}
 	
