@@ -1,7 +1,5 @@
 package com.bz.controller;
 
-import java.util.Scanner;
-
 import com.bz.comman.AccountType;
 import com.bz.comman.ScannerUtil;
 import com.bz.comman.Validation;

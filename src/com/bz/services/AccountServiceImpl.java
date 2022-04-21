@@ -1,6 +1,7 @@
 package com.bz.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.bz.comman.AccountType;
 import com.bz.exception.CustomException;
@@ -12,7 +13,7 @@ import com.bz.model.Customer;
 public class AccountServiceImpl implements IAccountService {
 
 	
-	private static ArrayList<Account> accounts = new ArrayList<Account>();
+	private static List<Account> accounts = new ArrayList<Account>();
 	private final static String IFSC = "SBIN00012";
 	private final static String BRANCH_CODE = "SBIN00012";
 	private final static String BRANCH_NAME = "SBIN00012";
