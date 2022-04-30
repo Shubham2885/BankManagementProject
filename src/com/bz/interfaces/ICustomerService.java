@@ -1,6 +1,5 @@
 package com.bz.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bz.exception.CustomException;

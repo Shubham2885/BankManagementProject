@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bz.comman.AccountType;
+import com.bz.dao.AccountDao;
+import com.bz.dao.IAccountDao;
 import com.bz.exception.CustomException;
 import com.bz.interfaces.IAccountService;
 import com.bz.interfaces.ICustomerService;
@@ -13,10 +15,11 @@ import com.bz.model.Customer;
 public class AccountServiceImpl implements IAccountService {
 
 	
-	private static List<Account> accounts = new ArrayList<Account>();
+//	private static List<Account> accounts = new ArrayList<Account>();
 	private final static String IFSC = "SBIN00012";
 	private final static String BRANCH_CODE = "SBIN00012";
 	private final static String BRANCH_NAME = "SBIN00012";
+	private IAccountDao dao = new AccountDao();
 	
 	@Override
 	public Account openAccount(int customerId, AccountType accountType, ICustomerService customerService) {
@@ -24,7 +27,7 @@ public class AccountServiceImpl implements IAccountService {
 		Customer customer = customerService.search(customerId);
 		if(customer != null) {
 			Account account = new Account();
-			long accountNo = 10000000 + customer.getId() + accounts.size();
+			long accountNo = 1000 + customer.getId();
 			account.setAccountNo(accountNo);
 			account.setIfscNo(IFSC);
 			account.setAccountType(accountType.toString());
@@ -32,8 +35,9 @@ public class AccountServiceImpl implements IAccountService {
 			account.setBranchName(BRANCH_NAME);
 			account.setBranchCode(BRANCH_CODE);
 			account.setBalance(0.0);
-			accounts.add(account);
-			return account;
+			account = dao.insertAccount(account);
+			
+				return account;
 		}
 		System.out.println("Account is not generated due invalid customer id");
 		return null;
@@ -43,7 +47,7 @@ public class AccountServiceImpl implements IAccountService {
 	public double creditBalance(int customerId, long accountNo, double balance, ICustomerService customerService) {
 		Customer customer = customerService.search(customerId);
 		if(customer != null) {
-			Account account = checkAcccount(accountNo, customer.getId());
+			Account account = null; //checkAcccount(accountNo, customer.getId());
 			System.out.println("Account = "+account);
 			if(account != null) {
 				double existingBal = account.getBalance();
@@ -55,15 +59,13 @@ public class AccountServiceImpl implements IAccountService {
 		return 0.0;
 	}
 
-	private Account checkAcccount(long accountNo, int id) throws CustomException.AccountNotFoundException {
-		for(Account account : accounts) {
-			if(accountNo == account.getAccountNo() && id == account.getCustomer_id()) {
-				return account;
-			}
-		}
-		throw new CustomException.AccountNotFoundException("Account Not found for "+accountNo+" and customer id "+id);
-	}
-	
-	
+//	private Account checkAcccount(long accountNo, int id) throws CustomException.AccountNotFoundException {
+//		for(Account account : accounts) {
+//			if(accountNo == account.getAccountNo() && id == account.getCustomer_id()) {
+//				return account;
+//			}
+//		}
+//		throw new CustomException.AccountNotFoundException("Account Not found for "+accountNo+" and customer id "+id);
+//	}
 
 }

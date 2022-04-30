@@ -1,19 +1,19 @@
 package com.bz.controller;
 
 import com.bz.comman.AccountType;
+import com.bz.comman.FactoryService;
+import com.bz.comman.ObjectCreationEnum;
 import com.bz.comman.ScannerUtil;
 import com.bz.comman.Validation;
 import com.bz.interfaces.IAccountService;
 import com.bz.interfaces.ICustomerService;
 import com.bz.model.Account;
 import com.bz.model.Customer;
-import com.bz.services.AccountServiceImpl;
-import com.bz.services.CustomerServiceImpl;
 
 public class BankManagementApp {
 
-	static ICustomerService customerService = new CustomerServiceImpl();
-	static IAccountService accountService = new AccountServiceImpl();
+	static ICustomerService customerService = (ICustomerService) FactoryService.getInstance().getBean(ObjectCreationEnum.CUSTOMERSERVICE);
+	static IAccountService accountService = (IAccountService) FactoryService.getInstance().getBean(ObjectCreationEnum.ACCOUNTSERVICE);
 	
 	public static void registerCustomer() {
 		
@@ -48,9 +48,9 @@ public class BankManagementApp {
 		System.out.println("Your Customer id is "+id);
 	}
 	
-	private static void showAllCustomer() {
-		System.out.println(customerService.getAllCustomers());
-	}
+//	private static void showAllCustomer() {
+//		System.out.println(customerService.getAllCustomers());
+//	}
 	
 	private static void openAccount() {
 		int custId = ScannerUtil.getInt("Customer Id");

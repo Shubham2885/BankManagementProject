@@ -2,6 +2,7 @@ package com.bz.comman;
 
 import java.util.Scanner;
 
+//Singleton Design patter
 public class ScannerUtil {
 
 	private static Scanner scanner = new Scanner(System.in);

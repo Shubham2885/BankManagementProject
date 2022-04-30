@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/Users/Shubham/Downloads/gson-2.8.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Shubham/Downloads/commons-collections4-4.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Shubham/Downloads/commons-lang3-3.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shubham/Downloads/mysql-connector-java-8.0.25.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,1 +1,32 @@
-[{"id":10000,"firstName":"Shubham","middleName":"M","lastName":"Chavan","mobileNo":"8238432488","username":"username","password":"password","email":"email@gamilc.om","addressId":0},{"id":10001,"firstName":"Shubham","middleName":"M","lastName":"Kamle","mobileNo":"2342342342","username":"sdjflsdf","password":"sdjfl","email":"sldfkj","addressId":0},{"id":10002,"firstName":"Raj","middleName":"W","lastName":"Kawale","mobileNo":"8121238123","username":"username","password":"password","email":"email@gamilcom","addressId":0}]
+[
+  {
+    "firstName": "Shubham",
+    "mobileNo": "8238432488",
+    "username": "username",
+    "lastName": "Chavan",
+    "addressId": 0,
+    "id": 10000,
+    "email": "email@gamilc.om",
+    "password": "password",
+    "middleName": "M"
+  },{
+    "firstName": "Shubham",
+    "mobileNo": "2342342342",
+    "username": "sdjflsdf",
+    "lastName": "Kamle",
+    "addressId": 0,
+    "id": 10001,
+    "email": "sldfkj",
+    "password": "sdjfl",
+    "middleName": "M"
+  },{
+    "firstName": "Raj",
+    "mobileNo": "8121238123",
+    "username": "username",
+    "lastName": "Kawale",
+    "addressId": 0,
+    "id": 10002,
+    "email": "email@gamilcom",
+    "password": "password",
+    "middleName": "W"
+  }]
